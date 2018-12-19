@@ -193,4 +193,44 @@ add flow anotation to each file, which should be flow checked
 // @flow
 
 21.
-npm start
+add support for jest/enzyme testing using flow
+
+A) npm install --save-dev jest
+
+B) npm install -g flow-typed
+
+C) flow-typed install jest@23.6.0 #
+
+D) npm i --save-dev enzyme enzyme-adapter-react-16 enzyme-to-json
+
+E) npm i --save-dev babel-jest babel-plugin-transform-flow-strip-types
+
+F) npm i --save-dev babel-core@^7.0.0-bridge.0 @babel/core regenerator-runtime
+
+G) package.json
+
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>__tests__/setup/setupEnzyme.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/"
+    ]
+  }
+}
+
+H) .flowconfig
+
+[libs]
+./flow-types/
+
+I) .babelrc
+
+"plugins": [
+  "transform-flow-strip-types"
+]
+
+22.
+npm test
